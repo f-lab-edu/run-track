@@ -19,7 +19,7 @@ function formatDate(dateString: string) {
 export default function RunningDetailCard() {
   const run = useRunningDetail();
 
-  const { updateRunning, isPending } = useUpdateRunning();
+  const { updateRunning } = useUpdateRunning();
 
   const handleSwitchChange = (checked: boolean) => {
     updateRunning({ id: run.id, excluded: checked });
@@ -76,7 +76,6 @@ export default function RunningDetailCard() {
               </div>
               <Switch
                 checked={run.excluded}
-                disabled={isPending}
                 onCheckedChange={handleSwitchChange}
               />
             </div>
