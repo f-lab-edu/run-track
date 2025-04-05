@@ -11,6 +11,12 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.2
         version: 1.1.2(@types/react@19.1.0)(react@19.1.0)
+      '@tanstack/react-query':
+        specifier: ^5.71.10
+        version: 5.71.10(react@19.1.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.71.10
+        version: 5.71.10(@tanstack/react-query@5.71.10(react@19.1.0))(react@19.1.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -42,6 +48,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.2
+      '@tanstack/eslint-plugin-query':
+        specifier: ^5.71.5
+        version: 5.71.5(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
       '@types/node':
         specifier: ^20
         version: 20.17.30
@@ -442,6 +451,28 @@ packages:
 
   '@tailwindcss/postcss@4.1.2':
     resolution: {integrity: sha512-vgkMo6QRhG6uv97im6Y4ExDdq71y9v2IGZc+0wn7lauQFYJM/1KdUVhrOkexbUso8tUsMOWALxyHVkQEbsM7gw==}
+
+  '@tanstack/eslint-plugin-query@5.71.5':
+    resolution: {integrity: sha512-6EDWMUQc35HEYtZrX4yRP7vBXjUhNLwO0JwLzkV14lNpTlpnPbNUltvgh+cUJBh3awpOuUNNuxTL96BG3azLmw==}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+
+  '@tanstack/query-core@5.71.10':
+    resolution: {integrity: sha512-/fKEY8fO1nbszfrBatzmhJa1nEwIKn0c6Tv2A1ocSA5OiD2GukOIV8nnBbvJRgZb/VIoBy9/N4PVbABI8YQLow==}
+
+  '@tanstack/query-devtools@5.71.5':
+    resolution: {integrity: sha512-Fq1JeAp+I52Md/KnyeFxzG7G0RpdHgeOfDNhSPkZQs/JqqXuAfpUf+wFHDz+vP0GZbSnla2JmcLSQebOkIb1yA==}
+
+  '@tanstack/react-query-devtools@5.71.10':
+    resolution: {integrity: sha512-n0xsIzwNvkIoZCmfHww28jFmnVTVzOt5dHj/py3LNFMJHGnJq9o9ttQESzVt2Hr7as00Aqf8ElVwH6na1o6dnw==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.71.10
+      react: ^18 || ^19
+
+  '@tanstack/react-query@5.71.10':
+    resolution: {integrity: sha512-mQYM/ObpL8YMDz8vCoUuHkbe8Yu7NnVRH8aBaBa/3zlufjp1f1VuWjeO3TcumNHfuVMDwEAGinsgwrB7OKADiQ==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tybys/wasm-util@0.9.0':
     resolution: {integrity: sha512-6+7nlbMVX/PVDCwaIQ8nTOPveOcFLSt8GcXdx8hD0bt39uWxYT88uXzqTd4fTvqta7oeUJqudepapKNt2DYJFw==}
@@ -2287,6 +2318,29 @@ snapshots:
       '@tailwindcss/oxide': 4.1.2
       postcss: 8.5.3
       tailwindcss: 4.1.2
+
+  '@tanstack/eslint-plugin-query@5.71.5(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)':
+    dependencies:
+      '@typescript-eslint/utils': 8.29.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
+      eslint: 9.23.0(jiti@2.4.2)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
+  '@tanstack/query-core@5.71.10': {}
+
+  '@tanstack/query-devtools@5.71.5': {}
+
+  '@tanstack/react-query-devtools@5.71.10(@tanstack/react-query@5.71.10(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/query-devtools': 5.71.5
+      '@tanstack/react-query': 5.71.10(react@19.1.0)
+      react: 19.1.0
+
+  '@tanstack/react-query@5.71.10(react@19.1.0)':
+    dependencies:
+      '@tanstack/query-core': 5.71.10
+      react: 19.1.0
 
   '@tybys/wasm-util@0.9.0':
     dependencies:
