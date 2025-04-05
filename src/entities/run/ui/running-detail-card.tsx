@@ -2,6 +2,7 @@ import { Calendar, Clock, MapPin, BarChart3 } from 'lucide-react';
 import { Card, CardContent } from '@/shared/ui/card';
 import { Switch } from '@/shared/ui/switch';
 import { useRunningDetail } from '../model/use-running-detail';
+import { useUpdateRunning } from '../model/use-update-running';
 
 function formatDate(dateString: string) {
   const date = new Date(dateString);
@@ -17,6 +18,12 @@ function formatDate(dateString: string) {
 
 export default function RunningDetailCard() {
   const run = useRunningDetail();
+
+  const { updateRunning, isPending } = useUpdateRunning();
+
+  const handleSwitchChange = (checked: boolean) => {
+    updateRunning({ id: run.id, excluded: checked });
+  };
 
   return (
     <Card className="overflow-hidden py-0">
@@ -67,7 +74,11 @@ export default function RunningDetailCard() {
                 <h3 className="text-sm font-medium">통계에서 제외</h3>
                 <p className="text-muted-foreground text-xs">이 러닝을 통계 계산에서 제외합니다</p>
               </div>
-              <Switch checked={run.excluded} />
+              <Switch
+                checked={run.excluded}
+                disabled={isPending}
+                onCheckedChange={handleSwitchChange}
+              />
             </div>
           </div>
         </div>
