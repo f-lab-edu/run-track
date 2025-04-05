@@ -1,6 +1,7 @@
 import { Calendar, Clock, MapPin, BarChart3 } from 'lucide-react';
 import { Card, CardContent } from '@/shared/ui/card';
 import { Switch } from '@/shared/ui/switch';
+import { useRunningDetail } from '../model/use-running-detail';
 
 function formatDate(dateString: string) {
   const date = new Date(dateString);
@@ -14,18 +15,9 @@ function formatDate(dateString: string) {
   return `${year}년 ${month}월 ${day}일 (${weekday})`;
 }
 
-const run = {
-  id: 1,
-  date: '2025-03-27',
-  distance: 5.2,
-  duration: 31,
-  pace: '5:57',
-  location: '한강 공원',
-  note: '가볍게 러닝',
-  excluded: true,
-};
-
 export default function RunningDetailCard() {
+  const run = useRunningDetail();
+
   return (
     <Card className="overflow-hidden py-0">
       <CardContent className="p-0">
