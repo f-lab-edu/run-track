@@ -14,16 +14,8 @@ const eslintConfig = [
     'next/core-web-vitals',
     'next/typescript',
     'prettier',
-    'plugin:tailwindcss/recommended',
     'plugin:@tanstack/query/recommended',
   ),
-  {
-    rules: {
-      'tailwindcss/classnames-order': 'warn',
-      'tailwindcss/no-custom-classname': 'warn',
-      'tailwindcss/no-contradicting-classname': 'error',
-    },
-  },
 ];
 
 export default eslintConfig;
