@@ -1,50 +1,33 @@
-import { RunDto, RunningCard } from '@/entities/run';
+import { Suspense } from 'react';
+import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { runQueries } from '@/entities/run/api/run-queries';
+import RunningList from '@/entities/run/ui/running-list';
 
-const runs: RunDto[] = [
-  {
-    id: 1,
-    date: '2025-03-27',
-    distance: 5.2,
-    duration: 31,
-    pace: '5:57',
-    location: '한강 공원',
-    note: '가볍게 러닝',
-    excluded: true,
-  },
-  {
-    id: 2,
-    date: '2025-03-28',
-    distance: 7.5,
-    duration: 45,
-    pace: '6:00',
-    location: '올림픽 공원',
-    note: '인터벌 트레이닝',
-    excluded: false,
-  },
-  {
-    id: 3,
-    date: '2025-03-29',
-    distance: 10,
-    duration: 62,
-    pace: '6:12',
-    location: '서울숲',
-    note: '장거리 러닝',
-    excluded: false,
-  },
-];
+interface HomePageProps {
+  dehydratedState: DehydratedState;
+}
 
-export default function HomePage() {
+export default function HomePage({ dehydratedState }: HomePageProps) {
   return (
-    <div className="px-4 py-6">
-      <h1 className="mb-6 text-2xl font-bold">러닝 기록</h1>
-      <div className="space-y-4">
-        {runs.map((run) => (
-          <RunningCard
-            key={run.id}
-            run={run}
-          />
-        ))}
+    <HydrationBoundary state={dehydratedState}>
+      <div className="px-4 py-6">
+        <h1 className="mb-6 text-2xl font-bold">러닝 기록</h1>
+        <Suspense fallback={<div>Loading...</div>}>
+          <RunningList />
+        </Suspense>
       </div>
-    </div>
+    </HydrationBoundary>
   );
+}
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery(runQueries.infinite());
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 }
