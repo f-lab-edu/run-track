@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import Link from 'next/link';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { cn } from '@/shared/lib/tw-utils';
 import { Badge } from '@/shared/ui/badge';
@@ -19,7 +20,10 @@ function RunningCard({ run }: RunningRecordProps) {
 
   return (
     <Card className="cursor-pointer overflow-hidden py-0 transition-colors hover:bg-slate-50">
-      <div className="p-3">
+      <Link
+        href={`/running/${run.id}`}
+        className="p-3"
+      >
         <div className="mb-1 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="font-medium">{formattedDate}</span>
@@ -55,7 +59,7 @@ function RunningCard({ run }: RunningRecordProps) {
             <p className="text-muted-foreground line-clamp-1 text-xs italic">{run.note}</p>
           </div>
         )}
-      </div>
+      </Link>
     </Card>
   );
 }
