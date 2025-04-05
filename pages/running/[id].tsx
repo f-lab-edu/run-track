@@ -1,1 +1,1 @@
-export { RunningDetailPage as default } from '@/pages/running-detail';
+export { RunningDetailPage as default, getServerSideProps } from '@/pages/running-detail';
