@@ -8,3 +8,10 @@ export interface RunDto {
   note: string;
   excluded: boolean;
 }
+
+export interface RunStatsDto {
+  totalDistance: number;
+  averageDistance: number;
+  totalDuration: number;
+  averagePace: string;
+}

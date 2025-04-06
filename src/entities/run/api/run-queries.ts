@@ -1,6 +1,7 @@
 import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import { fetchRuns } from './fetch-runs';
 import { fetchRun } from './fetch-run';
+import { fetchRunStats, type FetchRunStatsParams } from './fetch-run-stats';
 
 export const runQueries = {
   all: () => ['runs'],
@@ -23,5 +24,10 @@ export const runQueries = {
     queryOptions({
       queryKey: [...runQueries.all(), id],
       queryFn: () => fetchRun({ id }),
+    }),
+  stats: (params: FetchRunStatsParams) =>
+    queryOptions({
+      queryKey: [...runQueries.all(), 'stats', params],
+      queryFn: () => fetchRunStats(params),
     }),
 };
