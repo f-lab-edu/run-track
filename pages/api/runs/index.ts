@@ -23,11 +23,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Respon
   }
 
   const runs = readRuns();
+  // 날짜 기준으로 역순 정렬
+  const sortedRuns = [...runs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   const cursor = req.query.cursor ? parseInt(req.query.cursor as string) : null;
   const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
 
-  const startIndex = cursor ? runs.findIndex((run) => run.id === cursor) + 1 : 0;
-  const paginatedRuns = runs.slice(startIndex, startIndex + limit);
+  const startIndex = cursor ? sortedRuns.findIndex((run) => run.id === cursor) + 1 : 0;
+  const paginatedRuns = sortedRuns.slice(startIndex, startIndex + limit);
 
   const nextCursor = paginatedRuns.length === limit ? paginatedRuns[paginatedRuns.length - 1].id : null;
 
