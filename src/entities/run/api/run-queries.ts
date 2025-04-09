@@ -1,5 +1,6 @@
-import { infiniteQueryOptions } from '@tanstack/react-query';
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import { fetchRuns } from './fetch-runs';
+import { fetchRun } from './fetch-run';
 
 export const runQueries = {
   all: () => ['runs'],
@@ -17,5 +18,10 @@ export const runQueries = {
         return lastPage.nextCursor;
       },
       select: (data) => data.pages.flatMap((page) => page.runs),
+    }),
+  detail: (id: number) =>
+    queryOptions({
+      queryKey: [...runQueries.all(), id],
+      queryFn: () => fetchRun({ id }),
     }),
 };
