@@ -25,8 +25,8 @@ export function useUpdateRunning() {
     onError: (_, params, context) => {
       queryClient.setQueryData(runQueries.detail(params.id).queryKey, context?.prevData);
     },
-    onSettled: (_, __, params) => {
-      queryClient.invalidateQueries({ queryKey: runQueries.detail(params.id).queryKey });
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: runQueries.all() });
     },
   });
 

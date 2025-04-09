@@ -22,7 +22,7 @@ export default function RunningDetailCard() {
   const { updateRunning } = useUpdateRunning();
 
   const handleSwitchChange = (checked: boolean) => {
-    updateRunning({ id: run.id, excluded: checked });
+    updateRunning({ id: run.id, excluded: !checked });
   };
 
   return (
@@ -71,11 +71,11 @@ export default function RunningDetailCard() {
           <div className="mt-2 border-t pt-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-medium">통계에서 제외</h3>
-                <p className="text-muted-foreground text-xs">이 러닝을 통계 계산에서 제외합니다</p>
+                <h3 className="text-sm font-medium">통계에 포함</h3>
+                <p className="text-muted-foreground text-xs">이 러닝을 통계 계산에 포함합니다</p>
               </div>
               <Switch
-                checked={run.excluded}
+                checked={!run.excluded}
                 onCheckedChange={handleSwitchChange}
               />
             </div>

@@ -2,11 +2,13 @@ import { Ref } from 'react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
-import { type DateRange } from 'react-day-picker';
+import { type DateRange as DateRangeType } from 'react-day-picker';
 import { cn } from '@/shared/lib/tw-utils';
 import { Button } from './button';
 import { Calendar } from './calendar';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
+
+export type DateRange = DateRangeType;
 
 interface DateRangePickerProps {
   ref?: Ref<HTMLButtonElement>;
@@ -16,13 +18,7 @@ interface DateRangePickerProps {
   className?: string;
 }
 
-export default function DateRangePicker({
-  ref,
-  placeholder = '날짜 선택',
-  value,
-  onChange,
-  className,
-}: DateRangePickerProps) {
+export function DateRangePicker({ ref, placeholder = '날짜 선택', value, onChange, className }: DateRangePickerProps) {
   return (
     <div className={cn('grid gap-2', className)}>
       <Popover>
@@ -30,7 +26,7 @@ export default function DateRangePicker({
           <Button
             ref={ref}
             variant={'outline'}
-            className={cn('w-[300px] justify-start text-left font-normal', !value && 'text-muted-foreground')}
+            className={cn('w-full justify-start text-left font-normal', !value && 'text-muted-foreground')}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {value?.from ? (

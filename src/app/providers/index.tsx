@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import { Geist } from 'next/font/google';
+import { OverlayProvider } from 'overlay-kit';
 import { QueryProvider } from './query-provider';
 
 const geistSans = Geist({
@@ -10,9 +11,11 @@ const geistSans = Geist({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryProvider>
-      <main className={`${geistSans.variable} mx-auto min-h-screen max-w-[480px] shadow-md`}>
-        <Component {...pageProps} />
-      </main>
+      <OverlayProvider>
+        <main className={`${geistSans.variable} mx-auto min-h-screen max-w-[480px] shadow-md`}>
+          <Component {...pageProps} />
+        </main>
+      </OverlayProvider>
     </QueryProvider>
   );
 }
