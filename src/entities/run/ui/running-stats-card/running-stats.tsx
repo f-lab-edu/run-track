@@ -1,13 +1,8 @@
-import { DateRange } from '@/shared/ui/date-range-picker';
 import { useRunningStats } from '../../model/use-running-stats';
 import StatItem from './stat-item';
 
-interface RunningStatsProps {
-  dateRange?: DateRange;
-}
-
-export default function RunningStats({ dateRange }: RunningStatsProps) {
-  const stats = useRunningStats({ dateRange });
+export default function RunningStats() {
+  const stats = useRunningStats();
 
   return (
     <div className="mt-2 grid grid-cols-2 gap-4">
