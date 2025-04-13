@@ -1,10 +1,8 @@
 import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { QueryBoundary } from '@/shared/ui/query-boundary';
-import { runQueries } from '@/entities/run/api/run-queries';
-import RunningList from '@/entities/run/ui/running-list';
-import { Button } from '@/shared/ui/button';
 import { overlay } from 'overlay-kit';
-import { RunningStatsCard } from '@/entities/run';
+import { QueryBoundary } from '@/shared/ui/query-boundary';
+import { Button } from '@/shared/ui/button';
+import { RunningList, RunningListFilters, RunningStatsCard, runQueries } from '@/entities/run';
 
 interface HomePageProps {
   dehydratedState: DehydratedState;
@@ -29,6 +27,7 @@ export default function HomePage({ dehydratedState }: HomePageProps) {
             기록 통계
           </Button>
         </div>
+        <RunningListFilters />
         <QueryBoundary>
           <RunningList />
         </QueryBoundary>
