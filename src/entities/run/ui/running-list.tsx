@@ -1,15 +1,9 @@
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { InfiniteScroll } from '@/shared/ui/infinite-scroll';
-import { runQueries } from '../api/run-queries';
+import { useRunningList } from '../model/use-running-list';
 import RunningCard from './running-card';
 
 export default function RunningList() {
-  const {
-    data: runs,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useSuspenseInfiniteQuery(runQueries.infinite());
+  const { runs, hasNextPage, isFetchingNextPage, fetchNextPage } = useRunningList();
 
   return (
     <div className="space-y-4">
