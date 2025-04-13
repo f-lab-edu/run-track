@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from 'next';
 import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { overlay } from 'overlay-kit';
 import { QueryBoundary } from '@/shared/ui/query-boundary';
@@ -36,10 +37,10 @@ export default function HomePage({ dehydratedState }: HomePageProps) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(runQueries.infinite());
+  await queryClient.prefetchInfiniteQuery(runQueries.infinite(context.query));
 
   return {
     props: {
