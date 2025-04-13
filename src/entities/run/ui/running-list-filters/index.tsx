@@ -21,9 +21,10 @@ const initialValues: RunningListFiltersSchema = {
 export default function RunningListFilters() {
   const router = useRouter();
 
-  const defaultValues = useMemo(() => {
-    return Object.fromEntries(Object.entries(initialValues).map(([key, value]) => [key, router.query[key] ?? value]));
-  }, [router.query]);
+  const defaultValues = useMemo(
+    () => Object.fromEntries(Object.entries(initialValues).map(([key, value]) => [key, router.query[key] ?? value])),
+    [router.query],
+  );
 
   const methods = useForm<RunningListFiltersSchema>({
     resolver: zodResolver(runningListFiltersSchema),
@@ -31,14 +32,11 @@ export default function RunningListFilters() {
   });
 
   const onSubmit: SubmitHandler<RunningListFiltersSchema> = (data) => {
-    const filters = Object.fromEntries(Object.entries(data).filter(([, value]) => isNotNil(value)));
+    const query = Object.fromEntries(Object.entries(data).filter(([, value]) => isNotNil(value)));
 
     router.push({
       pathname: router.pathname,
-      query: {
-        ...router.query,
-        ...filters,
-      },
+      query,
     });
   };
 
