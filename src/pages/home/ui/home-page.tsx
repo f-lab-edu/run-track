@@ -1,10 +1,9 @@
+import { GetServerSidePropsContext } from 'next';
 import { dehydrate, DehydratedState, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { QueryBoundary } from '@/shared/ui/query-boundary';
-import { runQueries } from '@/entities/run/api/run-queries';
-import RunningList from '@/entities/run/ui/running-list';
-import { Button } from '@/shared/ui/button';
 import { overlay } from 'overlay-kit';
-import { RunningStatsCard } from '@/entities/run';
+import { QueryBoundary } from '@/shared/ui/query-boundary';
+import { Button } from '@/shared/ui/button';
+import { RunningList, RunningListFilters, RunningStatsCard, runQueries } from '@/entities/run';
 
 interface HomePageProps {
   dehydratedState: DehydratedState;
@@ -29,6 +28,7 @@ export default function HomePage({ dehydratedState }: HomePageProps) {
             기록 통계
           </Button>
         </div>
+        <RunningListFilters />
         <QueryBoundary>
           <RunningList />
         </QueryBoundary>
@@ -37,10 +37,10 @@ export default function HomePage({ dehydratedState }: HomePageProps) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery(runQueries.infinite());
+  await queryClient.prefetchInfiniteQuery(runQueries.infinite(context.query));
 
   return {
     props: {
